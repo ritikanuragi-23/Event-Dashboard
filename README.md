@@ -1,8 +1,10 @@
-# Event Dashboard
+
 
 A modern, responsive dashboard for managing, filtering, and showcasing events. Built with Node.js, Express, MongoDB, and Bootstrap.
 
-![Event Dashboard Screenshot](./screenshot.png)
+![Screenshot 2025-05-25 142718](https://github.com/user-attachments/assets/2440e340-5142-418d-85e3-a014c07aba7e)
+
+
 
 ## 🚀 Features
 
@@ -43,9 +45,7 @@ A modern, responsive dashboard for managing, filtering, and showcasing events. B
 
 5. **Open `index.html` in your browser.**
 
-## 🖼️ Screenshots
 
-_Add a screenshot named `screenshot.png` in your project root to display above._
 
 ## 🌟 Usage
 
