@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Event Dashboard</title>
+  <meta name="description" content="A modern event dashboard to manage, filter, and create events easily." />
+  <!-- Bootstrap CSS -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="styles.css" />
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"
+    rel="stylesheet"
+  />
+</head>
+<body>
+  <!-- Header -->
+  <header class="bg-dark text-white p-3">
+    <div class="container d-flex justify-content-between align-items-center">
+      <h1 class="h3 mb-0">Event Dashboard</h1>
+      <div class="d-flex align-items-center gap-3">
+        <label class="form-check form-switch mb-0">
+          <input class="form-check-input" type="checkbox" id="darkModeToggle" />
+          <span class="form-check-label">Dark Mode</span>
+        </label>
+        <button
+          class="btn btn-primary"
+          data-bs-toggle="modal"
+          data-bs-target="#createEventModal"
+          aria-label="Add Event"
+          id="addEventBtn"
+        >
+          Add Event
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <div class="container-fluid mt-4">
+    <div class="row">
+      <!-- Left Sidebar: Filters -->
+      <div class="col-md-4">
+        <div class="filter-panel p-4 bg-white rounded shadow-sm">
+          <h4 class="mb-3 text-secondary">Filter Events</h4>
+          <form id="filterForm">
+            <div class="mb-3">
+              <label for="filterName" class="form-label">Event Name</label>
+              <input type="text" id="filterName" class="form-control" placeholder="Search by name" />
+            </div>
+            <div class="mb-3">
+              <label for="filterLocation" class="form-label">Location</label>
+              <input type="text" id="filterLocation" class="form-control" placeholder="Search by location" />
+            </div>
+            <div class="mb-3">
+              <label for="filterDate" class="form-label">Date</label>
+              <input type="date" id="filterDate" class="form-control" />
+            </div>
+            <div class="mb-3">
+              <label for="filterType" class="form-label">Event Type</label>
+              <select id="filterType" class="form-select">
+                <option value="">All</option>
+                <option value="Free">Free</option>
+                <option value="Paid">Paid</option>
+              </select>
+            </div>
+            <button type="button" class="btn btn-secondary w-100" id="applyFilters">
+              Apply Filters
+            </button>
+            <button type="button" class="btn btn-outline-secondary w-100 mt-2" id="resetFilters">
+              Reset Filters
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Main Event List -->
+      <div class="col-md-5">
+        <div class="event-list-panel p-4">
+          <h2 class="mb-4 text-secondary" id="eventListTitle">Upcoming Events</h2>
+          <div id="eventList" class="row g-3">
+            <!-- Event cards will be injected here -->
+          </div>
+          <!-- Event Detail Card (hidden by default) -->
+          <div id="eventDetail" style="display: none;">
+            <!-- Event detail will be injected here -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Sidebar: Trending Events -->
+      <div class="col-md-3">
+        <div class="trending-panel p-4 bg-white rounded shadow-sm">
+          <h4 class="mb-3 text-secondary">Trending Events</h4>
+          <div id="trendingEvents">
+            <!-- Trending events will be injected here -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Create/Edit Event Modal -->
+  <div
+    class="modal fade"
+    id="createEventModal"
+    tabindex="-1"
+    aria-labelledby="createEventModalLabel"
+    aria-hidden="true"
+    aria-modal="true"
+    role="dialog"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 id="modalTitle" class="modal-title">Create Event</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <form id="createEventForm" enctype="multipart/form-data">
+            <div class="mb-3">
+              <label for="createEventName" class="form-label">Event Name</label>
+              <input type="text" name="name" id="createEventName" class="form-control" required />
+            </div>
+            <div class="mb-3">
+              <label for="createEventDate" class="form-label">Event Date</label>
+              <input type="date" name="date" id="createEventDate" class="form-control" required />
+            </div>
+            <div class="mb-3">
+              <label for="createEventLocation" class="form-label">Location</label>
+              <input type="text" name="location" id="createEventLocation" class="form-control" required />
+            </div>
+            <div class="mb-3">
+              <label for="createParticipants" class="form-label">Participants</label>
+              <input type="number" name="participants" id="createParticipants" class="form-control" required min="0" />
+            </div>
+            <div class="mb-3">
+              <label for="createEventType" class="form-label">Event Type</label>
+              <select name="type" id="createEventType" class="form-select" required>
+                <option value="Free">Free</option>
+                <option value="Paid">Paid</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="createEventImage" class="form-label">Event Image</label>
+              <input type="file" name="image" id="createEventImage" class="form-control" accept="image/*" />
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Save Event</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS Bundle and Custom JS -->
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+  ></script>
+  <script src="script.js"></script>
+</body>
+</html>
